@@ -11,6 +11,10 @@
 4.1 <a href="http://es6.ruanyifeng.com" target="_blank">http://es6.ruanyifeng.com</a>  
 5. echartsjs  
 5.1 <a href="https://www.echartsjs.com/zh/index.html" target="_blank">https://www.echartsjs.com/zh/index.html</a>  
+6. web网站  
+6.1 [web开发技术](https://developer.mozilla.org/zh-CN/docs/Web)  
+6.2 [菜鸟教程](https://www.runoob.com/)  
+6.3 [W3school](https://www.w3school.com.cn/)  
 ## II. 前端框架及脚手架
 1. react  
 1.1 react框架入门 <a href="https://zh-hans.reactjs.org/tutorial/tutorial.html" target="_blank">https://zh-hans.reactjs.org/tutorial/tutorial.html</a>  
@@ -21,3 +25,25 @@
 2.1 vue框架入门 <a href="https://cn.vuejs.org/v2/guide" target="_blank">https://cn.vuejs.org/v2/guide</a>  
 2.2 ElementUi文档 <a href="https://element.eleme.cn/#/zh-CN/component/installation" target="_blank">https://element.eleme.cn/#/zh-CN/component/installation</a>  
 2.3 vuex <a href="https://vuex.vuejs.org/zh" target="_blank">https://vuex.vuejs.org/zh</a>  
+### III. vue相关问题及解决方法
+1. 修改滚动条样式
+* 使用伪元素进行修改滚动条[类使用方法](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::-webkit-scrollbar)：
+```javaScript
+  ::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.25rem;
+    background: #ebf0f7;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: #bbb;
+    transition: all .2s;
+    border-radius: 0.25rem;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(95, 95, 95, 0.7);
+  }
+```
