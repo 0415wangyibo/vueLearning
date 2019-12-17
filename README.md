@@ -88,11 +88,53 @@
        return {
          '--radioFontSize': this.radioFontSize,
        };
-    }
+   }
 ```
 * 在css中引用变量,`calc()`函数用于动态计算：
 ```javaScript
    .selectRadio >>> .el-radio__label {
       font-size: calc(var(--radioFontSize, 14) * 1px);
    }
+```
+5. 动态挂载组件
+```javaScript
+<template>
+  <div ref="product">
+  </div>
+</template>
+
+<script>
+import Vue from 'vue';
+export default {
+    name: 'ProductModel',
+    props: {
+        fileName: { required: true }
+    },
+    computed: {},
+    mounted() {
+        this.createProduct();
+    },
+    methods: {
+        createProduct() {
+            const me = this;
+            import('@/components/product/' + fileName + '.vue').then(res => {
+                me.mountComponent(res.default);
+            });
+        },
+        mountComponent(loadedModule) {
+            // 实例化组件
+            let div = this.getEmptyDiv();
+            let ComponentContainerClass = Vue.extend(loadedModule);
+            new ComponentContainerClass({
+                store: this.$store
+            }).$mount(div);
+        },
+        getEmptyDiv() {
+            let div = document.createElement('div');
+            this.$refs.product.append(div);
+            return div;
+        }
+    }
+};
+</script>
 ```
