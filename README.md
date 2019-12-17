@@ -68,3 +68,31 @@
     font-size: 14px;
   }
 ```
+4. css变量定义`var`函数
+* 使用函数引入变量：
+```javaScript
+  <div :style="getStyle">
+     <el-radio-group>
+      <el-radio 
+       v-for="radio in radioList" 
+       :key="radio.radioId" 
+       :disabled="radio.disabled" 
+       :label="radio.radioId" 
+       :value="radio.radioId">
+       {{radio.name}}
+      </el-radio>
+     </el-radio-group>
+  </div>
+
+   getStyle() {
+       return {
+         '--radioFontSize': this.radioFontSize,
+       };
+    }
+```
+* 在css中引用变量,`calc()`函数用于动态计算：
+```javaScript
+   .selectRadio >>> .el-radio__label {
+      font-size: calc(var(--radioFontSize, 14) * 1px);
+   }
+```
