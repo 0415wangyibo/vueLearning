@@ -47,3 +47,11 @@
     background-color: rgba(95, 95, 95, 0.7);
   }
 ```
+2. 垂直水平居中
+```javaScript
+  .center-over{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+```
