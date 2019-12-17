@@ -138,3 +138,77 @@ export default {
 };
 </script>
 ```
+6. axios使用示例
+* 封装请求工具：
+```javaScript
+import axios from 'axios';
+import { Message } from 'element-ui';
+
+let instance = axios.create({
+    timeout: 20000,
+    headers: {
+        'X-Requested-With': 'XMLHttpRequest', //设置为异步
+        'Content-Type': 'application/json',
+    },
+    withCredentials: false
+});
+
+// 添加请求拦截器
+instance.interceptors.request.use(
+    config => {
+        return config
+    },
+    err => {
+        Message.error({ message: '请求超时!' })
+        return Promise.resolve(err)
+    }
+);
+
+// 添加响应拦截器
+instance.interceptors.response.use(
+    data => {
+        if (data.data.status === 200) {
+            return data.data
+        } else {
+            Message.error({ message: data.data.message })
+            return data.data
+        }
+    },
+    err => {
+        if (err.response) {
+            if (err.response.status === 504 || err.response.status === 404) {
+                Message.error({ message: '服务器被吃了⊙﹏⊙∥' })
+            } else if (err.response.status === 401) {
+                Message.error({ message: '登录信息失效，请重新登录' });
+            } else if (err.response.status === 500) {
+                Message.error({ message: '服务器开小差了⊙﹏⊙∥' })
+            } else {
+                Message.error({ message: '网络不给力，请稍后再试' })
+            }
+        } else {
+            Message.error({ message: '网络不给力，请稍后再试' })
+        }
+        return Promise.reject(err)
+    }
+)
+
+const putRequest = (url, params) => {
+    return instance.request({
+        method: 'put',
+        url: url,
+        data: params,
+    })
+}
+// 在main.js中进行属性赋值
+Vue.prototype.putRequest = putRequest;
+```
+* 可以将方法注入到Vue属性中，然后直接使用：
+```javaScript
+    async updateList() {
+      const res = await this.putRequest(
+        this.url,
+        this.params
+      );
+      // 获取到数据后可以对res进行处理  
+    },
+```
