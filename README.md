@@ -55,3 +55,16 @@
     align-items: center;
   }
 ```
+3. 覆盖默认样式
+* 使用`!important`提升样式的优先级：
+```javaScript
+  .color-picker-over .el-color-picker__trigger {
+    width: 100px !important;
+  }
+```
+* 使用`>>>`样式穿透:
+```javaScript
+  .selectRadio >>> .el-radio__label {
+    font-size: 14px;
+  }
+```
