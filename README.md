@@ -55,7 +55,15 @@
     align-items: center;
   }
 ```
-3. 覆盖默认样式
+3. 滚动条
+```javaScript
+   .content{
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: 300px;
+   }
+```
+4. 覆盖默认样式
 * 使用`!important`提升样式的优先级：
 ```javaScript
   .color-picker-over .el-color-picker__trigger {
@@ -68,7 +76,7 @@
     font-size: 14px;
   }
 ```
-4. css变量定义`var`函数
+5. css变量定义`var`函数
 * 使用函数引入变量：
 ```javaScript
   <div :style="getStyle">
@@ -96,7 +104,7 @@
       font-size: calc(var(--radioFontSize, 14) * 1px);
    }
 ```
-5. 动态挂载组件
+6. 动态挂载组件
 ```javaScript
 <template>
   <div ref="product">
@@ -138,7 +146,7 @@ export default {
 };
 </script>
 ```
-6. axios使用示例
+7. axios使用示例
 * 封装请求工具：
 ```javaScript
 import axios from 'axios';
@@ -212,7 +220,7 @@ Vue.prototype.putRequest = putRequest;
       // 获取到数据后可以对res进行处理  
     },
 ```
-7. vue集成echarts示例
+8. vue集成echarts示例
 ```javaScript
 // main.js中注入echarts属性
 Vue.prototype.$echarts = echarts;
