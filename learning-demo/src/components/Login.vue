@@ -17,38 +17,44 @@
 </template>
 
 <script>
+import { bodyToParm } from '@/tools/utils';
 export default {
-  name: 'Login',
-  data() {
-    return {
-      ruleForm: {
-        account: '',
-        password: ''
-      },
-      rules: {
-        account: [
-          { required: true, message: '请输入账号' },
-          { min: 2, max: 32, message: '长度在 2 到 32 个字符' }
-        ],
-        password: [
-          { required: true, message: '请输入密码' },
-          { min: 3, max: 32, message: '长度在 3 到 32 个字符' }
-        ]
-      }
-    };
-  },
-  methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
+    name: 'Login',
+    data() {
+        return {
+            ruleForm: {
+                account: '',
+                password: ''
+            },
+            rules: {
+                account: [
+                    { required: true, message: '请输入账号' },
+                    { min: 2, max: 32, message: '长度在 2 到 32 个字符' }
+                ],
+                password: [
+                    { required: true, message: '请输入密码' },
+                    { min: 3, max: 32, message: '长度在 3 到 32 个字符' }
+                ]
+            }
+        };
+    },
+    methods: {
+        submitForm(formName) {
+            this.$refs[formName].validate(valid => {
+                if (valid) {
+                    this.loginUser(this.ruleForm);
+                    alert('submit!');
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        async loginUser(data) {
+            const res = await this.getRequest(this.$urlApi.testLogin, data);
+            console.log(res);
         }
-      });
     }
-  }
 };
 </script>
 
