@@ -76,6 +76,13 @@
     font-size: 14px;
   }
 ```
+* 如果是sass/less的话可能无法识别`>>>`,这时候需要使用 `/deep/` 选择器:
+```javaScript
+  .divClass /deep/ .el-carousel__indicator:nth-child(2n) .el-carousel__button{
+    height: 5px;
+    background-color: #f00;
+  }
+```
 5. css变量定义`var`函数
 * 使用函数引入变量：
 ```javaScript
